@@ -43,9 +43,14 @@ function App() {
   }
 
   const addWatchListMovie = (movies) => {
-    const newWatchListArray = [...watchList, movies];
-    setWatchList(newWatchListArray);
-    saveToLocalStorage(newWatchListArray);
+    if (watchList.indexOf(movies) === -1) {
+      const newWatchListArray = [...watchList, movies];
+      setWatchList(newWatchListArray);
+      saveToLocalStorage(newWatchListArray);
+    }
+    else {
+      alert("This Movie already exists in your Watchlist");
+    }
   };
 
   const removeWatchListMovie = (movies) => {
