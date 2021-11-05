@@ -6,14 +6,20 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddWatchlist from './components/AddWatchlist';
 import RemoveWatchlist from './components/RemoveWatchlist';
+import FilterYear from './components/FilterYear';
+import FilterType from './components/FilterType';
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [watchList, setWatchList] = useState([])
   const [searchValue, setSearchValue] = useState('');
+  const [filterYear, setFilterYear] = useState('');
+  const [filterType, setFilterType] = useState('');
 
-  const getMovieRequest = async (searchValue) => {
-    const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=68a28605`
+
+  const getMovieRequest = async (searchValue,filterYear,filterType) => {
+    console.log(filterType)
+    const url = `https://www.omdbapi.com/?s=${searchValue}&y=${filterYear}&type=${filterType}&apikey=68a28605`
 
     const response = await fetch(url);
     const responseJson = await response.json();
@@ -25,8 +31,8 @@ function App() {
   };
 
   useEffect(() => {
-    getMovieRequest(searchValue);
-  }, [searchValue]);
+    getMovieRequest(searchValue,filterYear,filterType);
+  }, [searchValue,filterYear,filterType]);
 
   useEffect(() => {
 		const movieWatchList = JSON.parse(
@@ -62,8 +68,9 @@ function App() {
   return (
     <div className="container-fluid movie-app">
       <div className="row d-flex align-items-center mt-4 mb-4">
-        <MovieListHeading heading = "Movies"/>
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}/>
+        <FilterYear filterYear={filterYear} setFilterYear={setFilterYear}/>
+        <FilterType filterType={filterType} setFilterType={setFilterType}/>
       </div>
       <div className="row">
         <MovieList movies = {movies} handleWatchListClick={addWatchListMovie} watchListComponent = {AddWatchlist}/>
