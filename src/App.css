@@ -1,44 +1,249 @@
 body {
-  background: #141414;
-  color: #ffffff;
+  background: white;
+  color: black;
+  overflow: hidden;
 }
 
-.movie-app > .row{
-  overflow-x: auto;
-  flex-wrap: nowrap;
-
+p {
+  margin: 0;
 }
 
-.movie-app > ::-webkit-scrollbar {
-  display: none;
+.movie-app {
+  display: flex;
+  flex-direction: column;
 }
 
 .row>* {
   width: auto;
 }
 
-.image-container {
-  position: relative;
-  transition: 0.2s;
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.image-container:hover {
-  cursor: pointer;
-  transform: scale(1.1);
+/* 
+
+NAVIGATION
+
+*/
+
+.navigation {
+  background-color: #666666;
+  color: white;
+  flex-wrap: nowrap;
+  padding: 20px 40px;
 }
 
-.image-container:hover .overlay {
-  opacity: 1;
+.search-box, .search-box:hover, .search-box:active {
+  font-size: 32px;
+  font-weight: 300;
+  background-color: transparent;
+  color: white;
+  border: transparent;
 }
 
-.overlay {
-  position: absolute;
-  background: rgba(0, 0, 0, 0.8);
-  width: 92.5%;
-  transition: 0.5s ease;
-  opacity: 0;
-  bottom: 0;
+.search-box::placeholder {
+  font-size: 32px;
+  font-weight: 300;
+  color: white;
+}
+
+.filter-header {
   font-size: 20px;
+  font-weight: 300;
+}
+
+.navigation, .filter{
+  display: flex;
+  align-items: center;
+}
+
+.filter {
+  width: 50%;
+  justify-content: end;
+}
+
+.navigation {
+  justify-content: space-between;
+}
+
+.year-filter, .type-filter {
+  width: 40%;
+  max-width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+label {
+  margin-left: 8px;
+  margin-right: 16px;
+}
+
+/*
+
+MOVIE LIST
+
+*/
+
+.content {
+  width: 100vw;
+}
+
+.results {
+  margin: 50px;
+  font-size: 24px;
+}
+
+.movie-list {
+  max-width: 40%;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.movie-list-item {
+  color: black;
+  margin: 50px 20px;
+  position: relative;
+}
+
+.movie-list-item::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  background-color: #aaaaaa;
+  width: 100%;
+  bottom: -25px;
+  right: 0;
+}
+
+.image-container {
+  padding: 0;
+  width: 120px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.image-container > img {
+  width: 100%;
+}
+
+.title-container {
+  max-width: 70%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 28px;
+}
+
+.year {
+  font-size: 20px;
+  color: #666666;
+}
+
+/* 
+
+MOVIE DETAILS 
+
+*/
+
+.movie-details {
+  max-width: 60%;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.movie-details-container {
+  padding: 40px 20px;
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.poster-wrapper {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.poster {
+  width: 100%;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 20px;
-  text-align: center;
+  max-width: 100%;
+  flex: 1;
+}
+
+.watchlist-button-wrapper {
+  display: flex;
+  justify-content: end;
+}
+
+.bi-bookmark {
+  margin-right: 16px;
+}
+
+.btn {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie-title {
+  font-weight: 700;
+  font-size: 48px;
+}
+
+.info-features {
+  display: flex;
+  align-items: center;
+  margin: 12px 0 12px 2px;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.age-rating {
+  border: black 1px solid;
+  border-radius: 4px;
+  padding: 0 12px;
+  margin-right: 10px;
+}
+
+.info-cast {
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.movie-plot {
+  font-size: 18px;
+}
+
+.rating-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: calc(100% / 3);
+  position: relative;
+}
+
+.rating-stats:not(:last-child):after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  background-color: #666666;
+  width: 1px;
+  right: -2px;
 }
