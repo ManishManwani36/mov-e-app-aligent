@@ -10,7 +10,7 @@ function FilterType(props) {
                 <input
                  
                     type="radio" 
-                    checked={props.filterType === "Any"}
+                    checked={props.filterType === ""}
                     value=""
                     onChange={(event)=>{props.setFilterType(event.target.value)}}/>
                 <label>Any</label>
@@ -28,13 +28,6 @@ function FilterType(props) {
                     value="series"
                     onChange={(event)=>{props.setFilterType(event.target.value)}}/>
                 <label>Series</label>
-                <input
-                 
-                    type="radio" 
-                    checked={props.filterType === "episode"}
-                    value="episode"
-                    onChange={(event)=>{props.setFilterType(event.target.value)}}/>
-                <label>Episodes</label>
                 </div>
             </div>
         </>

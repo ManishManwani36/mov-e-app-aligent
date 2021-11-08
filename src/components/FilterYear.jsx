@@ -1,23 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Slider } from '@material-ui/core'
 
 function FilterYear(props) {
+    const [val, setVal] = useState([1970, 2021]);
+    const updateRange = (e, data) => {
+        setVal(data);
+    };
     return (
         <>
             <div className="year-filter">
-                <h1 className="filter-header">YEAR {props.filterYear}</h1>
-                <div className="row">
-                    <p>1970</p>
-                    <input 
-                    type="range" 
-                    className="form-range" 
-                    min="1970"
-                    max="2021"
-                    value={props.filterYear}
-                    onChange={(event)=> props.setFilterYear(event.target.value)}
-                    id="customRange1"></input>
-                    <p>2021</p>
+                <h1 className="filter-header">YEAR</h1>
+                <div className="range-slider">
+                    <p>{val[0]}</p>
+                    <Slider
+                        min={1970}
+                        max={2021}
+                        color="white"
+                        value={val}
+                        onChange={updateRange}
+                        onClick={() => props.setFilterYear(val)}
+                    />
+                    <p>{val[1]}</p>
                 </div>
-                
+
             </div>
         </>
     )
