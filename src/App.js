@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './components/MovieList';
@@ -10,6 +10,7 @@ import AddWatchlist from './components/AddWatchlist';
 import RemoveWatchlist from './components/RemoveWatchlist';
 import WatchList from './components/WatchList';
 import MovieListHeading from './components/MovieListHeading';
+import { TweenMax, Power3 } from 'gsap'
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -92,9 +93,55 @@ function App() {
     setWatchList(newWatchListArray);
   };
 
+  // ---------------------------GSAP----------------------------------------
+
+  let navigation = useRef(null);
+
+  useEffect(() => {
+    TweenMax.to(
+      navigation,
+      .8,
+      {
+        opacity: 1,
+        y: 0,
+        ease: Power3.easeOut
+      }
+    )
+  }, []);
+
+  let movieListDiv = useRef(null);
+
+  useEffect(() => {
+    TweenMax.to(
+      movieListDiv,
+      .8,
+      {
+        opacity: 1,
+        y: 0,
+        ease: Power3.easeOut,
+        delay: 0.4
+      }
+    )
+  }, []);
+
+  let movieDetailsDiv = useRef(null);
+
+  useEffect(() => {
+    TweenMax.to(
+      movieDetailsDiv,
+      .8,
+      {
+        opacity: 1,
+        y: 0,
+        ease: Power3.easeOut,
+        delay: 0.6
+      }
+    )
+  }, []);
+
   return (
     <div className="container-fluid movie-app">
-      <div className="row d-flex align-items-center navigation">
+      <div className="row d-flex align-items-center navigation" ref={el => {navigation = el}}>
         <div className="search">
           <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
         </div>
@@ -105,7 +152,7 @@ function App() {
       </div>
 
       <div className="row content">
-        <div className="col movie-list">
+        <div className="col movie-list" ref={el => {movieListDiv = el}}>
           <p className="results">{results} Results</p>
           <MovieList 
 
@@ -114,7 +161,7 @@ function App() {
           />
         </div>
 
-        <div className="col movie-details">
+        <div className="col movie-details" ref={el => {movieDetailsDiv = el}}>
           <MovieDetails 
             movieDetails={movieDetails} 
             movieDetailsRatings={movieDetailsRatings}

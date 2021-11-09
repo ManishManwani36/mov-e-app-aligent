@@ -70,6 +70,8 @@ NAVIGATION
 
 .navigation {
   justify-content: space-between;
+  opacity: 0;
+  transform: translateY(-20px);
 }
 
 .year-filter, .type-filter {
@@ -117,6 +119,8 @@ MOVIE LIST
   max-width: 40%;
   height: 90vh;
   overflow-y: scroll;
+  opacity: 0;
+  transform: translateY(-20px);
 }
 
 .movie-list-item {
@@ -187,6 +191,8 @@ MOVIE DETAILS
   max-width: 60%;
   height: 90vh;
   overflow-y: scroll;
+  opacity: 0;
+  transform: translateY(-20px);
 }
 
 .movie-details-container {
