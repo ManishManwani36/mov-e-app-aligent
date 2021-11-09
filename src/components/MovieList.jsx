@@ -1,10 +1,10 @@
 import React from 'react'
 
-function MovieList(props) {
+function MovieList(props, key) {
     return (
         <>
             {props.movies.map((movie, index) => (
-                <div className="row movie-list-item" onClick={() => props.setMovieDetailsID(`${movie.imdbID}`)}>
+                <div className="row movie-list-item" key={index} onClick={() => props.setMovieDetailsID(`${movie.imdbID}`)}>
                     <div className="image-container d-flex justify-content-start m-3">
                         <img src={movie.Poster} alt='movie'></img>
                     </div>

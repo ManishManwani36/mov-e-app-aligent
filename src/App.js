@@ -7,9 +7,9 @@ import FilterYear from './components/FilterYear';
 import FilterType from './components/FilterType';
 import MovieDetails from './components/MovieDetails';
 import AddWatchlist from './components/AddWatchlist';
-import MovieListHeading from './components/MovieListHeading';
 import RemoveWatchlist from './components/RemoveWatchlist';
 import WatchList from './components/WatchList';
+import MovieListHeading from './components/MovieListHeading';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -23,8 +23,7 @@ function App() {
   const [movieDetailsRatings, setMovieDetailsRatings] = useState([]);
   const [watchList, setWatchList] = useState([]);
 
-  const getMovieRequest = async (searchValue, filterYear, filterType) => {
-    console.log(searchValue, filterYear, filterType)
+  const getMovieRequest = async (searchValue, filterType) => {
     const url = `https://www.omdbapi.com/?s=${searchValue}&type=${filterType}&apikey=68a28605`
 
     const response = await fetch(url);
@@ -33,10 +32,6 @@ function App() {
     if (responseJson.Search) {
       setMovies(responseJson.Search);
       setFilteredMovies(responseJson.Search)
-
-      setFilteredMovies(movies);
-      const result = movies.filter(movie => (movie.Year.substring(0,4) >= filterYear[0] && movie.Year.substring(0,4) <= filterYear[1]));
-      setFilteredMovies(result);
     }
 
     if (responseJson.totalResults) {
@@ -46,8 +41,17 @@ function App() {
   };
 
   useEffect(() => {
-    getMovieRequest(searchValue, filterYear, filterType);
-  }, [searchValue, filterYear, filterType]);
+    getMovieRequest(searchValue, filterType);
+  }, [searchValue, filterType]);
+
+  useEffect(() => {
+    const filterMoviesByYear = (filterYear) => {
+      setFilteredMovies(movies);
+        const result = movies.filter(movie => (movie.Year.substring(0,4) >= filterYear[0] && movie.Year.substring(0,4) <= filterYear[1]));
+        setFilteredMovies(result);
+    };
+    filterMoviesByYear(filterYear)
+  }, [filterYear, movies]);
 
 
   const getMovieDetailsRequest = async(movieDetailsID) => {
@@ -104,6 +108,7 @@ function App() {
         <div className="col movie-list">
           <p className="results">{results} Results</p>
           <MovieList 
+
             movies={filteredMovies}
             setMovieDetailsID={setMovieDetailsID}
           />
@@ -116,7 +121,7 @@ function App() {
             handleWatchListClick={addWatchlistMovie}
             watchListComponent={AddWatchlist}
           />
-          <MovieListHeading heading='WatchList' />
+          <MovieListHeading heading='WatchList :' />
           <WatchList 
             movies={watchList}
             setMovieDetailsID={setMovieDetailsID}

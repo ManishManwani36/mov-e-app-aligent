@@ -3,11 +3,13 @@ import MovieRatings from './MovieRatings'
 
 function MovieDetails(props) {
     const ratings = props.movieDetailsRatings
-
     const WatchListComponent = props.watchListComponent;
+
+    let detailsExist = props.movieDetails;
+    if (detailsExist.Title) {
     return (
         <>
-            <div className="movie-details-container col">
+            <div className="movie-details-container col" >
                 <div className="movie-info row">
                     <figure className="poster-wrapper">
                         <img src={props.movieDetails.Poster} alt="" className="poster" />
@@ -55,7 +57,15 @@ function MovieDetails(props) {
 
             </div>
         </>
-    )
+    )}
+
+    else {
+        return (
+            <div className = "skeleton">
+            
+            </div>
+        )
+    }
 }
 
 export default MovieDetails

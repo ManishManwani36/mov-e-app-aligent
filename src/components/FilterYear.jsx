@@ -15,7 +15,6 @@ function FilterYear(props) {
                     <Slider
                         min={1970}
                         max={2021}
-                        color="white"
                         value={val}
                         onChange={updateRange}
                         onClick={() => props.setFilterYear(val)}
